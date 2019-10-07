@@ -19,6 +19,7 @@ class FilmDetail extends React.Component {
     // Ne pas oublier de binder la fonction _shareFilm sinon, lorsqu'on va l'appeler depuis le headerRight de la navigation, this.state.film sera undefined et fera planter l'application
     this._shareFilm = this._shareFilm.bind(this)
     this._toggleFavorite = this._toggleFavorite.bind(this)
+    this._toggleSeen = this._toggleSeen.bind(this)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -103,11 +104,18 @@ class FilmDetail extends React.Component {
   }
 
   _toggleFavorite() {
-        // Définition de notre action ici
-        const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
-        // dispatch l'action au Store
-        this.props.dispatch(action)
+      // Définition de notre action ici
+      const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
+      // dispatch l'action au Store
+      this.props.dispatch(action)
     }
+
+  _toggleSeen() {
+    // Définition de notre action ici
+    const action = { type: "TOGGLE_SEEN", value: this.state.film }
+    // dispatch l'action au Store
+    this.props.dispatch(action)
+  }
 
   _displayFilm() {
     if (this.state.film != undefined) {
@@ -141,6 +149,10 @@ class FilmDetail extends React.Component {
               return company.name;
             }).join(" / ")}</Text>
           </View>
+          <Button
+            title="Marquer comme vu"
+            onPress={() => this._toggleSeen()}
+          />
         </ScrollView>
       )
     }

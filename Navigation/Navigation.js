@@ -62,6 +62,18 @@ const TestStackNavigator = createStackNavigator({
   }
 })
 
+const SeenFilmsStackNavigator = createStackNavigator({
+  News: {
+    screen: News,
+    navigationOptions: {
+      title: 'Mes Films Vus',
+    },
+  },
+  FilmDetail: {
+    screen: FilmDetail,
+  }
+})
+
 const MoviesTabNavigator = createBottomTabNavigator(
   {
     Search: {
@@ -100,6 +112,16 @@ const MoviesTabNavigator = createBottomTabNavigator(
         tabBarIcon: () => {
           return <Image
             source={require('../Images/ic_fiber_new.png')}
+            style={styles.icon}/>
+        }
+      }
+    },
+    SeenFilms: {
+      screen: SeenFilmsStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Images/ic_seen.png')}
             style={styles.icon}/>
         }
       }
