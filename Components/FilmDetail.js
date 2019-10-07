@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   //return state -> retourne tout le state, pas une bonne pratique
   return {
-    favoritesFilm: state.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm
   }
 }
 

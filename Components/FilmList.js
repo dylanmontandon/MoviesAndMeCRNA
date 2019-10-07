@@ -59,7 +59,7 @@ class FilmList extends React.Component {
 //The results of mapStateToProps must be a plain object, which will be merged into the component’s props.
 const mapStateToProps = state => {
   return {
-    favoritesFilm: state.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm
   }
 }
 
