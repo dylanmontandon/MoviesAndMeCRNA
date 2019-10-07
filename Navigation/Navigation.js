@@ -9,6 +9,7 @@ import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 import Test from '../Components/Test'
+import News from '../Components/News'
 
 const SearchStackNavigator = createStackNavigator({
   Search: { // Ici j'ai appelé la vue "Search" mais on peut mettre ce que l'on veut. C'est le nom qu'on utilisera pour appeler cette vue
@@ -37,6 +38,18 @@ const FavoriteStackNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Détail'
     }
+  }
+})
+
+const NewsStackNavigator = createStackNavigator({
+  News: {
+    screen: News,
+    navigationOptions: {
+      title: 'Les Derniers Films',
+    },
+  },
+  FilmDetail: {
+    screen: FilmDetail,
   }
 })
 
@@ -77,6 +90,16 @@ const MoviesTabNavigator = createBottomTabNavigator(
         tabBarIcon: () => {
           return <Image
             source={require('../Images/ic_gear.png')}
+            style={styles.icon}/>
+        }
+      }
+    },
+    News: {
+      screen: NewsStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Images/ic_fiber_new.png')}
             style={styles.icon}/>
         }
       }
