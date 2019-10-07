@@ -84,16 +84,16 @@ const MoviesTabNavigator = createBottomTabNavigator(
         }
       }
     },
-    Test: {
-      screen: TestStackNavigator,
-      navigationOptions: {
-        tabBarIcon: () => {
-          return <Image
-            source={require('../Images/ic_gear.png')}
-            style={styles.icon}/>
-        }
-      }
-    },
+    // Test: {
+    //   screen: TestStackNavigator,
+    //   navigationOptions: {
+    //     tabBarIcon: () => {
+    //       return <Image
+    //         source={require('../Images/ic_gear.png')}
+    //         style={styles.icon}/>
+    //     }
+    //   }
+    // },
     News: {
       screen: NewsStackNavigator,
       navigationOptions: {
