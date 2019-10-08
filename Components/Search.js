@@ -69,8 +69,8 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log("search props: " + this.props)
-    console.log("favoritesFilm: " + this.props.favoritesFilm)
+    //console.log("search props: " + this.props)
+    //console.log("favoritesFilm: " + this.props.favoritesFilm)
     return (
       <View style={styles.main_container}>
         <TextInput

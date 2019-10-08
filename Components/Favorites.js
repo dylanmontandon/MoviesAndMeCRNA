@@ -9,13 +9,13 @@ import { connect } from 'react-redux'
 class Favorites extends React.Component {
 
   _displayDetailForFilm = (idFilm) => {
-    console.log("Display film " + idFilm)
+    //console.log("Display film " + idFilm)
     // On a récupéré les informations de la navigation, on peut afficher le détail du film
     this.props.navigation.navigate("FilmDetail", {idFilm: idFilm})
  }
 
   render() {
-    console.log("favorites film: " + this.props.favoritesFilm)
+    //console.log("favorites film: " + this.props.favoritesFilm)
     return (
       <View style={styles.main_container}>
         <View style={styles.avatar_container}>

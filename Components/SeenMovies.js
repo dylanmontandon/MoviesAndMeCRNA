@@ -10,19 +10,19 @@ import FilmList from './FilmList'
 class SeenMovies extends React.Component {
 
     _displayDetailForFilm = (idFilm) => {
-      console.log("Display film " + idFilm)
+      //console.log("Display film " + idFilm)
       // On a récupéré les informations de la navigation, on peut afficher le détail du film
       this.props.navigation.navigate("FilmDetail", {idFilm: idFilm})
    }
 
    render() {
-     console.log("Seen movies: " + this.props.seenFilms)
+     //console.log("Seen movies: " + this.props.seenFilms)
      return (
        <View style={styles.main_container}>
          <FilmList
            films={this.props.seenFilms}
            navigation={this.props.navigation}
-           //empêche l'appel à l'API
+           //empêche l'appel à l'API + affiche différemment la liste -> simple
            seenList={true}
          />
        </View>
