@@ -10,6 +10,7 @@ import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 import Test from '../Components/Test'
 import News from '../Components/News'
+import SeenFilms from '../Components/SeenMovies'
 
 const SearchStackNavigator = createStackNavigator({
   Search: { // Ici j'ai appelé la vue "Search" mais on peut mettre ce que l'on veut. C'est le nom qu'on utilisera pour appeler cette vue
@@ -63,8 +64,8 @@ const TestStackNavigator = createStackNavigator({
 })
 
 const SeenFilmsStackNavigator = createStackNavigator({
-  News: {
-    screen: News,
+  SeenFilms: {
+    screen: SeenFilms,
     navigationOptions: {
       title: 'Mes Films Vus',
     },

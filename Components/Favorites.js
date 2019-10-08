@@ -24,6 +24,7 @@ class Favorites extends React.Component {
         <FilmList
           films={this.props.favoritesFilm}
           navigation={this.props.navigation}
+          //empêche l'appel à l'API
           favoriteList={true}
         />
       </View>

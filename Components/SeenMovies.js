@@ -3,17 +3,11 @@
 import FilmItem from './FilmItem'
 
 import React from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
+import FilmList from './FilmList'
 
 class SeenMovies extends React.Component {
-
-  constructor(props) {
-      super(props)
-      this.state = {
-        films: []
-      }
-    }
 
     _displayDetailForFilm = (idFilm) => {
       console.log("Display film " + idFilm)
@@ -22,35 +16,24 @@ class SeenMovies extends React.Component {
    }
 
    render() {
-       return (
-           <FlatList
-             style={styles.list}
-             data={this.props.films}
-             extraData={this.props.favoritesFilm}
-             keyExtractor={(item) => item.id.toString()}
-             renderItem={({item}) => (
-               <FilmItem
-                 film={item}
-                 isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false}
-                 displayDetailForFilm={this._displayDetailForFilm}
-               />
-             )}
-             onEndReachedThreshold={0.5}
-             onEndReached={() => {
-               if (!this.props.favoriteList && this.props.page < this.props.totalPages) {
-                 // On appelle la méthode loadFilm du component Search pour charger plus de films
-                 this.props.loadFilms()
-               }
-             }}
-           />
-       )
-     }
+     console.log("Seen movies: " + this.props.seenFilms)
+     return (
+       <View style={styles.main_container}>
+         <FilmList
+           films={this.props.seenFilms}
+           navigation={this.props.navigation}
+           //empêche l'appel à l'API
+           seenList={true}
+         />
+       </View>
+     )
    }
+ }
 
    const styles = StyleSheet.create({
-     list: {
+     main_container: {
        flex: 1
-     }
+     },
    })
 
 //permet de connecter le state de l'application au component FilmDetail.
@@ -59,7 +42,7 @@ class SeenMovies extends React.Component {
 //The results of mapStateToProps must be a plain object, which will be merged into the component’s props.
 const mapStateToProps = state => {
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+    seenFilms: state.toggleSeen.seenFilms
   }
 }
 

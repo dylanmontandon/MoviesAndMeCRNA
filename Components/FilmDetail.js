@@ -104,10 +104,10 @@ class FilmDetail extends React.Component {
   }
 
   _toggleFavorite() {
-      // Définition de notre action ici
-      const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
-      // dispatch l'action au Store
-      this.props.dispatch(action)
+    // Définition de notre action ici
+    const action = { type: "TOGGLE_FAVORITE", value: this.state.film }
+    // dispatch l'action au Store
+    this.props.dispatch(action)
     }
 
   _toggleSeen() {
@@ -115,6 +115,33 @@ class FilmDetail extends React.Component {
     const action = { type: "TOGGLE_SEEN", value: this.state.film }
     // dispatch l'action au Store
     this.props.dispatch(action)
+  }
+
+  _displayFavoriteImage() {
+    var sourceImage = require('../Images/ic_favorite_border.png')
+    var shouldEnlarge = false // Par défaut, si le film n'est pas en favoris, on veut qu'au clic sur le bouton, celui-ci s'agrandisse => shouldEnlarge à true
+    if (this.props.favoritesFilm.findIndex(item => item.id === this.state.film.id) !== -1) {
+      sourceImage = require('../Images/ic_favorite.png')
+      shouldEnlarge = true // Si le film est dans les favoris, on veut qu'au clic sur le bouton, celui-ci se rétrécisse => shouldEnlarge à false
+    }
+    return (
+      <EnlargeShrink
+        shouldEnlarge={shouldEnlarge}>
+        <Image
+          style={styles.favorite_image}
+          source={sourceImage}
+        />
+      </EnlargeShrink>
+    )
+  }
+
+  _displaySeenButtonText() {
+    //valeur par défaut
+    var text = "Marquer comme vu"
+    if (this.props.seenFilms.findIndex(item => item.id === this.state.film.id) !== -1) {
+      text = "Non vu"
+    }
+    return text;
   }
 
   _displayFilm() {
@@ -150,30 +177,12 @@ class FilmDetail extends React.Component {
             }).join(" / ")}</Text>
           </View>
           <Button
-            title="Marquer comme vu"
+            title={this._displaySeenButtonText()}
             onPress={() => this._toggleSeen()}
           />
         </ScrollView>
       )
     }
-  }
-
-  _displayFavoriteImage() {
-    var sourceImage = require('../Images/ic_favorite_border.png')
-    var shouldEnlarge = false // Par défaut, si le film n'est pas en favoris, on veut qu'au clic sur le bouton, celui-ci s'agrandisse => shouldEnlarge à true
-    if (this.props.favoritesFilm.findIndex(item => item.id === this.state.film.id) !== -1) {
-      sourceImage = require('../Images/ic_favorite.png')
-      shouldEnlarge = true // Si le film est dans les favoris, on veut qu'au clic sur le bouton, celui-ci se rétrécisse => shouldEnlarge à false
-    }
-    return (
-      <EnlargeShrink
-        shouldEnlarge={shouldEnlarge}>
-        <Image
-          style={styles.favorite_image}
-          source={sourceImage}
-        />
-      </EnlargeShrink>
-    )
   }
 
   render() {
@@ -262,9 +271,9 @@ const styles = StyleSheet.create({
 //This means that any time the store is updated, mapStateToProps will be called.
 //The results of mapStateToProps must be a plain object, which will be merged into the component’s props.
 const mapStateToProps = (state) => {
-  //return state -> retourne tout le state, pas une bonne pratique
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm,
+    seenFilms: state.toggleSeen.seenFilms
   }
 }
 

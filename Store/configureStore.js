@@ -3,7 +3,7 @@
 import { createStore } from 'redux'
 import toggleFavorite from './Reducers/favoriteReducer'
 import setAvatar from './Reducers/avatarReducer'
-import toggleSeen from './Reducers/toggleSeen'
+import toggleSeen from './Reducers/seenReducer'
 import { persistCombineReducers } from 'redux-persist'
 import asyncStorage from '@react-native-community/async-storage';
 

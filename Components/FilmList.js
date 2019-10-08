@@ -32,12 +32,13 @@ class FilmList extends React.Component {
                <FilmItem
                  film={item}
                  isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false}
+                 isFilmSeen={(this.props.seenFilms.findIndex(film => film.id === item.id) !== -1) ? true : false}
                  displayDetailForFilm={this._displayDetailForFilm}
                />
              )}
              onEndReachedThreshold={0.5}
              onEndReached={() => {
-               if (!this.props.favoriteList && this.props.page < this.props.totalPages) {
+               if (!this.props.favoriteList && !this.props.seenList && this.props.page < this.props.totalPages) {
                  // On appelle la méthode loadFilm du component Search pour charger plus de films
                  this.props.loadFilms()
                }
@@ -59,7 +60,8 @@ class FilmList extends React.Component {
 //The results of mapStateToProps must be a plain object, which will be merged into the component’s props.
 const mapStateToProps = state => {
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+      favoritesFilm: state.toggleFavorite.favoritesFilm,
+      seenFilms: state.toggleSeen.seenFilms
   }
 }
 
