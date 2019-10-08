@@ -4,8 +4,17 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi'
 import FadeIn from '../Animations/FadeIn'
+import moment from 'moment'
 
 class FilmItemSimple extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      //false = afficher le titre du film ; true = afficher la date de sortie
+      showReleaseDate: false
+    }
+  }
 
   _displayFavoriteImage() {
     //Test to display image
@@ -19,6 +28,11 @@ class FilmItemSimple extends React.Component {
     }
   }
 
+  _longPress() {
+    //inverse le booléen
+    this.setState({ showReleaseDate: !this.state.showReleaseDate })
+  }
+
   render() {
     const film = this.props.film
     const displayDetailForFilm = this.props.displayDetailForFilm
@@ -27,14 +41,15 @@ class FilmItemSimple extends React.Component {
       <FadeIn>
         <TouchableOpacity
           style={styles.main_container}
-          onPress={() => displayDetailForFilm(film.id)}>
+          onPress={() => displayDetailForFilm(film.id)}
+          onLongPress= {() => this._longPress()}>
           <View style={styles.content_container}>
               <Image
                 style={styles.image}
                 source={{uri: getImageFromApi(film.poster_path)}}
               />
               {this._displayFavoriteImage()}
-              <Text style={styles.title_text}>{film.title}</Text>
+              <Text style={styles.title_text}>{this.state.showReleaseDate ? "Sorti le " + moment(film.release_date, "YYYY-MM-DD").format("DD.MM.YYYY") : film.title}</Text>
           </View>
         </TouchableOpacity>
       </FadeIn>
